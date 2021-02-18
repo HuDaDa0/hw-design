@@ -42,11 +42,11 @@ function Menu(props: MenuProps) {
   }
 
   const renderChildren = () => {
-    return React.Children.map(children, (child) => {
+    return React.Children.map(children, (child, index) => {
       const childElement = child as React.FunctionComponentElement<MenuItemProps>
       const { displayName } = childElement.type 
       if (displayName === 'MenuItem') {
-        return React.cloneElement(childElement)
+        return React.cloneElement(childElement, { index })
       } else {
         console.error('Warning: Menu has a child which is not a MenuItem component')
       }
