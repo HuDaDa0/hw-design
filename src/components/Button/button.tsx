@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 
 type ButtonSize = 'lg' | 'sm'
-type ButtonType = 'primary' | 'default' | 'danger' | 'link'
+export type ButtonType = 'primary' | 'default' | 'danger' | 'link'
 
 interface BaseButtonProps {
   className?: string;
@@ -16,7 +16,7 @@ interface BaseButtonProps {
 
 type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>
 type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>
-type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
+export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 
 function Button(props: ButtonProps) {
   const {

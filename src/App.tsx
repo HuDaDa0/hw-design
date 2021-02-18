@@ -2,15 +2,23 @@ import React from 'react'
 
 import './styles/index.scss'
 
-import Button from './components/Button/button'
+import Menu from './components/Menu/menu'
+import MenuItem from './components/Menu/menuItem'
 
 function App() {
   return (
     <div className="App">
-      <Button btnType='danger' onClick={ e=> {console.log(e)}}>hahah</Button>
-      <Button size='lg' btnType='primary'>hahah</Button>
-      <Button size='sm' disabled={true}>hahah</Button>
-      <Button href='http://www.baidu.com' btnType='link'>hahah</Button>
+      <Menu onSelect={() => {}}>
+        <MenuItem index={0}>
+          one
+        </MenuItem>
+        <MenuItem index={1}>
+          two
+        </MenuItem>
+        <MenuItem index={2}>
+          three
+        </MenuItem>
+      </Menu>
     </div>
   )
 }
