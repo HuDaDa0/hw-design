@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { MenuContext } from './menu'
 
 
-interface MenuItemProps {
+export interface MenuItemProps {
   index?: number;
   disabled?: boolean;
   className?: string;
@@ -14,7 +14,6 @@ interface MenuItemProps {
 
 
 function MenuItem(props: MenuItemProps) {
-
   const { index = 0, disabled, className, style, children } = props
 
   const context = useContext(MenuContext)
@@ -35,6 +34,7 @@ function MenuItem(props: MenuItemProps) {
   )
 }
 
+MenuItem.displayName = 'MenuItem'
 
 export default MenuItem
 
