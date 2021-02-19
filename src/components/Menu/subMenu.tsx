@@ -13,10 +13,11 @@ interface SubMenuProps {
 }
 
 function SubMenu(props: SubMenuProps) {
-
-  const { index = '0', title, disabled, className, style, children } = props
-  const [menuOpen, setOpen] = useState(false)
+  
   const context = useContext(MenuContext)
+  const { index = '0', title, disabled, className, style, children } = props
+  const isOpen = (index && context.mode === 'vertical') ? context.defaultOpenSubMenus.includes(index) : false
+  const [menuOpen, setOpen] = useState(isOpen)
 
   const classes = classNames('menu-item submenu-item', className, {
     'is-active': context.index === index,

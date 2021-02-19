@@ -11,19 +11,21 @@ interface MenuProps {
   style?: React.CSSProperties;
   onSelect?: (selectedIndex: string) => void;
   children?: React.ReactNode;
+  defaultOpenSubMenus: string[];
 }
 
 interface IMenuContext {
   index: string;
   onSelect?: (selectedIndex: string) => void;
   mode: string;
+  defaultOpenSubMenus: string[];
 }
 
 export const MenuContext = createContext({} as IMenuContext)
 
 function Menu(props: MenuProps) {
 
-  const { defaultIndex, className, mode = '', style, children, onSelect } = props
+  const { defaultIndex, className, mode = '', style, children, defaultOpenSubMenus, onSelect } = props
 
   const [currentActive, setActive] = useState(defaultIndex)
   const classes = classNames('hw-menu', className, {
@@ -39,7 +41,8 @@ function Menu(props: MenuProps) {
   const passedContext = {
     index: currentActive ? currentActive : '0',
     onSelect: handleSelect,
-    mode
+    mode,
+    defaultOpenSubMenus
   }
 
   const renderChildren = () => {
@@ -68,7 +71,8 @@ function Menu(props: MenuProps) {
 
 Menu.defaultProps = {
   defaultIndex: '0',
-  mode: 'horizontal'
+  mode: 'horizontal',
+  defaultOpenSubMenus: []
 }
 
 export default Menu
