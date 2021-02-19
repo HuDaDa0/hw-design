@@ -27,7 +27,8 @@ function Menu(props: MenuProps) {
 
   const [currentActive, setActive] = useState(defaultIndex)
   const classes = classNames('hw-menu', className, {
-    'menu-vertical': mode === 'vertical'
+    'menu-vertical': mode === 'vertical',
+    'menu-horizontal': mode === 'horizontal'
   })
 
   const handleSelect = (index: number) => {
@@ -45,7 +46,7 @@ function Menu(props: MenuProps) {
     return React.Children.map(children, (child, index) => {
       const childElement = child as React.FunctionComponentElement<MenuItemProps>
       const { displayName } = childElement.type 
-      if (displayName === 'MenuItem') {
+      if (displayName === 'MenuItem' || displayName === 'SubMenu') {
         return React.cloneElement(childElement, { index })
       } else {
         console.error('Warning: Menu has a child which is not a MenuItem component')
