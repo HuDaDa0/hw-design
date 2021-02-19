@@ -9,7 +9,7 @@ import SubMenu from './components/Menu/subMenu'
 function App() {
   return (
     <div className="App">
-      <Menu onSelect={(index) => { console.log(index) }} mode="vertical" defaultOpenSubMenus={['2']}>
+      <Menu mode="vertical" defaultOpenSubMenus={['2']}>
         <MenuItem>
           one
         </MenuItem>

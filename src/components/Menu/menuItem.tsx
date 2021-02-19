@@ -22,8 +22,9 @@ function MenuItem(props: MenuItemProps) {
     'is-active': context.index === index
   })
 
-  const handleClick = () => {
+  const handleClick = (e: any) => {
     if (!disabled && context.onSelect) {
+      e.stopPropagation()
       context.onSelect(index)
     }
   }

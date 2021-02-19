@@ -20,7 +20,7 @@ function SubMenu(props: SubMenuProps) {
   const [menuOpen, setOpen] = useState(isOpen)
 
   const classes = classNames('menu-item submenu-item', className, {
-    'is-active': context.index === index,
+    'is-active': context.index.includes(index),
     'is-disabled': disabled,
     'is-vertical': context.mode === 'vertical'
   })
@@ -77,7 +77,6 @@ function SubMenu(props: SubMenuProps) {
       </ul>
     )
   }
-
 
   return (
     <li className={classes} style={style} onClick={handleClick} { ...hoverEvents }>

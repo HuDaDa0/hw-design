@@ -25,7 +25,15 @@ export const MenuContext = createContext({} as IMenuContext)
 
 function Menu(props: MenuProps) {
 
-  const { defaultIndex, className, mode = '', style, children, defaultOpenSubMenus, onSelect } = props
+  const { 
+    defaultIndex,
+    className,
+    mode = '', 
+    style, 
+    children, 
+    defaultOpenSubMenus, 
+    onSelect 
+  } = props
 
   const [currentActive, setActive] = useState(defaultIndex)
   const classes = classNames('hw-menu', className, {
