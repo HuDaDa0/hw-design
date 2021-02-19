@@ -4,18 +4,27 @@ import './styles/index.scss'
 
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem'
+import SubMenu from './components/Menu/subMenu'
 
 function App() {
   return (
     <div className="App">
-      <Menu onSelect={() => {}}>
-        <MenuItem index={0}>
+      <Menu onSelect={(index) => { console.log(index) }} mode="vertical">
+        <MenuItem>
           one
         </MenuItem>
-        <MenuItem index={1}>
+        <MenuItem>
           two
         </MenuItem>
-        <MenuItem index={2}>
+        <SubMenu title="子菜单">
+          <MenuItem>
+            submenu one
+          </MenuItem>
+          <MenuItem>
+            submenu two
+          </MenuItem>
+        </SubMenu>
+        <MenuItem>
           three
         </MenuItem>
       </Menu>

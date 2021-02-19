@@ -5,17 +5,17 @@ import { MenuItemProps } from './menuItem'
 type MenuMode = 'horizontal' | 'vertical'
 
 interface MenuProps {
-  defaultIndex? : number;
+  defaultIndex? : string;
   className?: string;
   mode?: MenuMode;
   style?: React.CSSProperties;
-  onSelect?: (selectedIndex: number) => void;
+  onSelect?: (selectedIndex: string) => void;
   children?: React.ReactNode;
 }
 
 interface IMenuContext {
-  index: number;
-  onSelect?: (selectedIndex: number) => void;
+  index: string;
+  onSelect?: (selectedIndex: string) => void;
   mode: string;
 }
 
@@ -31,13 +31,13 @@ function Menu(props: MenuProps) {
     'menu-horizontal': mode === 'horizontal'
   })
 
-  const handleSelect = (index: number) => {
+  const handleSelect = (index: string) => {
     setActive(index)
     onSelect && onSelect(index)
   }
 
   const passedContext = {
-    index: currentActive ? currentActive : 0,
+    index: currentActive ? currentActive : '0',
     onSelect: handleSelect,
     mode
   }
@@ -47,7 +47,9 @@ function Menu(props: MenuProps) {
       const childElement = child as React.FunctionComponentElement<MenuItemProps>
       const { displayName } = childElement.type 
       if (displayName === 'MenuItem' || displayName === 'SubMenu') {
-        return React.cloneElement(childElement, { index })
+        return React.cloneElement(childElement, { 
+          index: index.toString()
+         })
       } else {
         console.error('Warning: Menu has a child which is not a MenuItem component')
       }
@@ -65,7 +67,7 @@ function Menu(props: MenuProps) {
 }
 
 Menu.defaultProps = {
-  defaultIndex: 0,
+  defaultIndex: '0',
   mode: 'horizontal'
 }
 

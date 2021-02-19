@@ -44,9 +44,6 @@
       .arrow-icon {
         transform: rotate(180deg);
       }
-      .hw-submenu {
-        display: block;
-      }
     }
   }
   .is-vertical {
@@ -60,6 +57,7 @@
     }
   }
   .hw-submenu {
+    display: none;
     white-space: nowrap;
     padding-left: 0;
     .menu-item {

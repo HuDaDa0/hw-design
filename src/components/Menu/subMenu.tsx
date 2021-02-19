@@ -4,7 +4,7 @@ import { MenuItemProps } from './menuItem'
 import { MenuContext } from './menu'
 
 interface SubMenuProps {
-  index?: number;
+  index?: string;
   title: string;
   disabled?: boolean;
   className?: string;
@@ -14,8 +14,8 @@ interface SubMenuProps {
 
 function SubMenu(props: SubMenuProps) {
 
-  const { index = 0, title, disabled, className, style, children } = props
-
+  const { index = '0', title, disabled, className, style, children } = props
+  const [menuOpen, setOpen] = useState(false)
   const context = useContext(MenuContext)
 
   const classes = classNames('menu-item submenu-item', className, {
@@ -30,15 +30,40 @@ function SubMenu(props: SubMenuProps) {
     }
   }
 
+  let timer: any = null
+  const handleMouse = (e: React.MouseEvent, toggle: boolean) => {
+    timer && clearTimeout(timer)
+    e.preventDefault()
+    timer = setTimeout(() => {
+      setOpen(toggle)
+    }, 300)
+  }
+
+  const handleSubmenuClick = (e: any) => {
+    e.preventDefault()
+    setOpen(!menuOpen)
+  }
+
+  const clickEvents = context.mode === 'vertical' ? {
+    onClick: handleSubmenuClick
+  } : {}
+
+  const hoverEvents = context.mode !== 'vertical' ? {
+    onMouseEnter: (e: React.MouseEvent) => { handleMouse(e, true) },
+    onMouseLeave: (e: React.MouseEvent) => { handleMouse(e, false) }
+  } : {}
+
   const renderChildren = () => {
 
-    const classes = classNames('hw-submenu')
+    const classes = classNames('hw-submenu', {
+      'menu-opened': menuOpen
+    })
 
     const childrenComponent = React.Children.map(children, (child, i) => {
       const childElement = child as React.FunctionComponentElement<MenuItemProps>
       if (childElement.type.displayName === 'MenuItem') {
         return React.cloneElement(childElement, {
-          
+          index: `${index}-${i}`
         })
       } else {
         console.error('Warning: SubMenu has a child which is not a MenuItem component')
@@ -54,8 +79,8 @@ function SubMenu(props: SubMenuProps) {
 
 
   return (
-    <li className={classes} style={style} onClick={handleClick}>
-      <div className="submenu-title">{ title }</div>
+    <li className={classes} style={style} onClick={handleClick} { ...hoverEvents }>
+      <div className="submenu-title" { ...clickEvents }>{ title }</div>
       { renderChildren() }
     </li>
   )
