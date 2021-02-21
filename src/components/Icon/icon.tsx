@@ -9,17 +9,18 @@ library.add(fas)
 export type ThemeProps = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'light' | 'dark'
 
 export interface IconProps extends FontAwesomeIconProps {
-  theme? : ThemeProps
+  theme? : ThemeProps;
+  style? : React.CSSProperties;
 }
 
 function Icon(props: IconProps) {
   
-  const { className, theme, ...restProps } = props
+  const { className, style, theme, ...restProps } = props
   const classes = classNames('hw-icon', className, {
     [`icon-${theme}`]: theme
   })
 
-  return <FontAwesomeIcon className={classes} {...restProps} />
+  return <FontAwesomeIcon className={classes} style={style} {...restProps} />
 }
 
 
